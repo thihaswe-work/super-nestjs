@@ -127,10 +127,24 @@
                   "kind": "scalar"
                 }
               },
+              "hashedPassword": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "id": {
                 "nullable": false,
                 "type": {
                   "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "password": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
                   "kind": "scalar"
                 }
               },
@@ -191,8 +205,14 @@
                 "gender": {
                   "column": "gender"
                 },
+                "hashedPassword": {
+                  "column": "hashedPassword"
+                },
                 "id": {
                   "column": "id"
+                },
+                "password": {
+                  "column": "password"
                 },
                 "phone": {
                   "column": "phone"
@@ -317,6 +337,11 @@
                   "nativeType": "text",
                   "nullable": true
                 },
+                "hashedPassword": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
                 "id": {
                   "codecId": "pg/int4@1",
                   "default": {
@@ -325,6 +350,11 @@
                   },
                   "nativeType": "int4",
                   "nullable": false
+                },
+                "password": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
                 },
                 "phone": {
                   "codecId": "pg/text@1",
@@ -373,7 +403,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "099873e944eca98b9d04b31cad7d7ab324853a160dadf3535d0c102449834199"
+    "storageHash": "fd852d0d116ef96668ce294e1d1e2c46c1deb23a5cb72c43f962d65255e3fc4d"
   },
   "execution": {
     "executionHash": "4abff323cc88151ef9c9a0ec90122cfee6d46814a118cdb66a9fdd94a4123463",

@@ -6,6 +6,8 @@ model User {
   phone    String?   @unique
   photo    String?
   username  String?
+  password String?
+  hashedPassword String?
   gender  String?
   posts     Post[]
   createdAt TimestamptzString @default(now())

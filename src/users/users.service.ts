@@ -22,9 +22,7 @@ export class UsersService {
     },
   ];
 
-  async findOne(identifier: string): Promise<User | undefined> {
-    return this.users.find(
-      (user) => user.email === identifier || user.phone === identifier,
-    );
+  async findOne(username: string): Promise<User | undefined> {
+    return this.users.find((user) => user.username === username);
   }
 }

@@ -33,7 +33,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'099873e944eca98b9d04b31cad7d7ab324853a160dadf3535d0c102449834199'>;
+  StorageHashBase<'fd852d0d116ef96668ce294e1d1e2c46c1deb23a5cb72c43f962d65255e3fc4d'>;
 export type ExecutionHash =
   ExecutionHashBase<'4abff323cc88151ef9c9a0ec90122cfee6d46814a118cdb66a9fdd94a4123463'>;
 export type ProfileHash =
@@ -255,6 +255,8 @@ export type FieldOutputTypes = {
       readonly phone: CodecTypes['pg/text@1']['output'] | null;
       readonly photo: CodecTypes['pg/text@1']['output'] | null;
       readonly username: CodecTypes['pg/text@1']['output'] | null;
+      readonly password: CodecTypes['pg/text@1']['output'] | null;
+      readonly hashedPassword: CodecTypes['pg/text@1']['output'] | null;
       readonly gender: CodecTypes['pg/text@1']['output'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -277,6 +279,8 @@ export type FieldInputTypes = {
       readonly phone: CodecTypes['pg/text@1']['input'] | null;
       readonly photo: CodecTypes['pg/text@1']['input'] | null;
       readonly username: CodecTypes['pg/text@1']['input'] | null;
+      readonly password: CodecTypes['pg/text@1']['input'] | null;
+      readonly hashedPassword: CodecTypes['pg/text@1']['input'] | null;
       readonly gender: CodecTypes['pg/text@1']['input'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -297,7 +301,9 @@ export type StorageColumnTypes = {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly email: CodecTypes['pg/text@1']['output'] | null;
       readonly gender: CodecTypes['pg/text@1']['output'] | null;
+      readonly hashedPassword: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly password: CodecTypes['pg/text@1']['output'] | null;
       readonly phone: CodecTypes['pg/text@1']['output'] | null;
       readonly photo: CodecTypes['pg/text@1']['output'] | null;
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -319,7 +325,9 @@ export type StorageColumnInputTypes = {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly email: CodecTypes['pg/text@1']['input'] | null;
       readonly gender: CodecTypes['pg/text@1']['input'] | null;
+      readonly hashedPassword: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly password: CodecTypes['pg/text@1']['input'] | null;
       readonly phone: CodecTypes['pg/text@1']['input'] | null;
       readonly photo: CodecTypes['pg/text@1']['input'] | null;
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -435,6 +443,16 @@ type ContractBase = Omit<
                   readonly nullable: true;
                 };
                 readonly username: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly password: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                };
+                readonly hashedPassword: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
@@ -560,6 +578,14 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
+              readonly password: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly hashedPassword: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
               readonly gender: {
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
@@ -598,6 +624,8 @@ type ContractBase = Omit<
                 readonly phone: { readonly column: 'phone' };
                 readonly photo: { readonly column: 'photo' };
                 readonly username: { readonly column: 'username' };
+                readonly password: { readonly column: 'password' };
+                readonly hashedPassword: { readonly column: 'hashedPassword' };
                 readonly gender: { readonly column: 'gender' };
                 readonly createdAt: { readonly column: 'createdAt' };
                 readonly updatedAt: { readonly column: 'updatedAt' };
