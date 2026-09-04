@@ -3,28 +3,34 @@ import { PrismaService } from '../prisma/prisma.service.js';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {
     return await this.prisma.client.orm.public.User.all();
   }
 
   async findOne(identifier: string) {
-    const user = await this.prisma.client.orm.public.User
-      .where((u) => u.email.eq(identifier))
-      .first();
+    const user = await this.prisma.client.orm.public.User.where(
+      (u) => u.email.eq(identifier) || u.phone.eq(identifier),
+    ).first();
 
     if (user) return user;
 
-    return await this.prisma.client.orm.public.User
-      .where((u) => u.username.eq(identifier))
-      .first();
+    return await this.prisma.client.orm.public.User.where((u) =>
+      u.username.eq(identifier),
+    ).first();
+  }
+
+  async findById(id: number) {
+    return await this.prisma.client.orm.public.User.where((u) =>
+      u.id.eq(id),
+    ).first();
   }
 
   async findByEmail(email: string) {
-    return await this.prisma.client.orm.public.User
-      .where((u) => u.email.eq(email))
-      .first();
+    return await this.prisma.client.orm.public.User.where((u) =>
+      u.email.eq(email),
+    ).first();
   }
 
   async createUser(data: {

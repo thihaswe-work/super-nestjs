@@ -16,8 +16,8 @@ export class AuthService {
     private firebaseAuthService: FirebaseAuthService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
+  async validateUser(identifier: string, password: string): Promise<any> {
+    const user = await this.usersService.findOne(identifier);
     if (user && user.password === password) {
       const { password, ...result } = user;
       return result;
@@ -40,7 +40,9 @@ export class AuthService {
 
   private async registerLocal(dto: RegisterDto) {
     if (!dto.email || !dto.password) {
-      throw new BadRequestException('email and password are required for local registration');
+      throw new BadRequestException(
+        'email and password are required for local registration',
+      );
     }
 
     const existing = await this.usersService.findByEmail(dto.email);
@@ -59,10 +61,14 @@ export class AuthService {
 
   private async registerGoogle(dto: RegisterDto) {
     if (!dto.accessToken) {
-      throw new BadRequestException('accessToken is required for google registration');
+      throw new BadRequestException(
+        'accessToken is required for google registration',
+      );
     }
 
-    const info = await this.googleAuthService.verifyAccessToken(dto.accessToken);
+    const info = await this.googleAuthService.verifyAccessToken(
+      dto.accessToken,
+    );
     if (!info.email) {
       throw new BadRequestException('Google account has no verified email');
     }
@@ -81,10 +87,14 @@ export class AuthService {
 
   private async registerFacebook(dto: RegisterDto) {
     if (!dto.accessToken) {
-      throw new BadRequestException('accessToken is required for facebook registration');
+      throw new BadRequestException(
+        'accessToken is required for facebook registration',
+      );
     }
 
-    const info = await this.facebookAuthService.verifyAccessToken(dto.accessToken);
+    const info = await this.facebookAuthService.verifyAccessToken(
+      dto.accessToken,
+    );
     if (!info.email) {
       throw new BadRequestException('Facebook account has no verified email');
     }
@@ -103,7 +113,9 @@ export class AuthService {
 
   private async registerFirebase(dto: RegisterDto) {
     if (!dto.idToken) {
-      throw new BadRequestException('idToken is required for firebase registration');
+      throw new BadRequestException(
+        'idToken is required for firebase registration',
+      );
     }
 
     const info = await this.firebaseAuthService.verifyIdToken(dto.idToken);
